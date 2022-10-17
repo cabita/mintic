@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-10-2022 a las 01:52:33
+-- Tiempo de generación: 17-10-2022 a las 21:15:33
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.4.27
 
@@ -31,6 +31,15 @@ CREATE TABLE `category` (
   `id_category` int(11) NOT NULL,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `category`
+--
+
+INSERT INTO `category` (`id_category`, `name`) VALUES
+(1, 'Postres'),
+(2, 'Sopas'),
+(4, 'Arroces');
 
 -- --------------------------------------------------------
 
@@ -122,6 +131,28 @@ CREATE TABLE `recipe` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `recipe2`
+--
+
+CREATE TABLE `recipe2` (
+  `id_recipe2` int(11) NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `id_category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `recipe2`
+--
+
+INSERT INTO `recipe2` (`id_recipe2`, `title`, `image`, `description`, `id_category`) VALUES
+(1, 'Receta de Galletas de limón caseras', 'galletas_limon.jpg', 'Las galletas de limón se elaboran con una masa sencilla y, además, son muy fáciles y rápidas de preparar. Unas deliciosas galletas con mucho sabor a limón, ideales para acompañar un café, para el desayuno o para la merienda.', 1),
+(2, 'Receta de Budín de avena y limón', 'budin_avena_y_limon.jpg', 'La avena es un cereal con un alto porcentaje de fibra y hierro, un ingrediente muy saludable que deberías incluir en tu alimentación cotidiana. No solo para cuidar tu salud o bajar de peso, sino también si tienes diabetes.', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `role`
 --
 
@@ -197,6 +228,13 @@ ALTER TABLE `recipe`
   ADD KEY `id_ingredient` (`id_ingredient`);
 
 --
+-- Indices de la tabla `recipe2`
+--
+ALTER TABLE `recipe2`
+  ADD PRIMARY KEY (`id_recipe2`),
+  ADD KEY `id_category` (`id_category`);
+
+--
 -- Indices de la tabla `role`
 --
 ALTER TABLE `role`
@@ -217,7 +255,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `comment`
@@ -248,6 +286,12 @@ ALTER TABLE `instruction`
 --
 ALTER TABLE `recipe`
   MODIFY `id_recipe` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `recipe2`
+--
+ALTER TABLE `recipe2`
+  MODIFY `id_recipe2` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `role`
@@ -297,6 +341,12 @@ ALTER TABLE `recipe`
   ADD CONSTRAINT `id_image` FOREIGN KEY (`id_image`) REFERENCES `image` (`id_image`),
   ADD CONSTRAINT `id_ingredient` FOREIGN KEY (`id_ingredient`) REFERENCES `ingredient` (`id_ingredient`),
   ADD CONSTRAINT `id_instruction` FOREIGN KEY (`id_instruction`) REFERENCES `instruction` (`id_instruction`);
+
+--
+-- Filtros para la tabla `recipe2`
+--
+ALTER TABLE `recipe2`
+  ADD CONSTRAINT `id_category` FOREIGN KEY (`id_recipe2`) REFERENCES `category` (`id_category`);
 
 --
 -- Filtros para la tabla `users`
